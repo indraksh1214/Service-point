@@ -32,7 +32,7 @@ router2.get('/', async(req,res)=>{
 router2.get('/:serviceNumber', async(req,res)=>{
     try{  
         const getStatus = await Status.findOne({serviceNumber: req.params.serviceNumber});
-        res.json(getStatus);
+        res.send(''+getStatus.status);
     }
     catch(err){
         console.log(err);

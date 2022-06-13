@@ -14,7 +14,7 @@ router1.post('/' , async(req,res)=>{
         serviceNumber: c
     });
     const servicRrequest = await request.save();
-    res.json(servicRrequest)
+    res.send('Thank you for registering your service request '+ req.body.name +'. your service request number is '+c+'. use it for futher interaction.)
     } catch (err) {
     console.log(err);
     res.status(500).json(err);

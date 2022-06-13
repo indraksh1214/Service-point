@@ -14,7 +14,6 @@ const requestService = mongoose.Schema({
     },    
     serviceNumber: {
         type: String,
-        required: false
     }
 });
 

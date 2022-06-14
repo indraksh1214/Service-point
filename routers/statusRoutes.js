@@ -40,17 +40,4 @@ router2.get('/:serviceNumber', async(req,res)=>{
     }
 });
 
-
-router2.put('/getStatus/', async(req,res)=>{
-    try{  
-        const getStatus = await Status.findOne({serviceNumber: req.params.serviceNumber});
-        res.send(''+getStatus.status);
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-
 module.exports = router2;

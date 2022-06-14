@@ -19,6 +19,18 @@ router2.post('/' , async(req,res)=>{
 
 router2.get('/', async(req,res)=>{
     try{  
+        const statuses = await Status.find();
+        res.json(statuses);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+
+router2.get('/:serviceNumber', async(req,res)=>{
+    try{  
         const getStatus = await Status.findOne({serviceNumber: req.params.serviceNumber});
         res.send(''+getStatus.status);
     }

@@ -5,7 +5,7 @@ const validate = require('../model/validation');
 router3.post('/', async(req,res)=>{
     try{  
         const validationNumber = new validate({
-            validator: req.body.phoneNumber 
+            validator: '9014494983' 
         });
         const number = req.body.phoneNumber;
         if(number.length() == 10)

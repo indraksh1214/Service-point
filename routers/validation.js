@@ -2,10 +2,10 @@ const express = require('express');
 const router3 = express.Router();
 const validate = require('../model/validation');
 
-router3.post('/', async(req,res)=>{
+router3.post('/', (req,res)=>{
     try{  
         const validationNumber = new validate({
-            validator: '9014494983' 
+            validator: req.body.phoneNumber
         });
         const number = req.body.phoneNumber;
         if(number.length() == 10)

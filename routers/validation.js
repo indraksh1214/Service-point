@@ -5,7 +5,7 @@ const validate = require('../model/validation');
 router3.post('/', async(req,res)=>{
     try{  
         const number = req.body.phoneNumber;
-        if(number.length == 10)
+        if(number.length() == 10)
         {
             if(number.charAt(0) == 9 || number.charAt(0) == 8 || number.charAt(0) == 7 || number.charAt(0) == 6){
                 const validationNumber = new validate({
@@ -29,7 +29,7 @@ router3.post('/', async(req,res)=>{
 router3.post('/validateServiceRequest/', async(req,res)=>{
     try{  
         const serviceNumber = req.body.serviceNumber;
-        if(serviceNumber.length == 6)
+        if(serviceNumber.length() == 6)
         {
             if(serviceNumber.slice(0,2) == 'SR'){
                 const validationNumber1 = new validate({

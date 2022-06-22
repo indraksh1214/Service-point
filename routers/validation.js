@@ -4,13 +4,13 @@ const validate = require('../model/validation');
 
 router3.post('/', async(req,res)=>{
     try{  
+        const validationNumber = new validate({
+            validator: req.body.phoneNumber 
+        });
         const number = req.body.phoneNumber;
         if(number.length() == 10)
         {
             if(number.charAt(0) == 9 || number.charAt(0) == 8 || number.charAt(0) == 7 || number.charAt(0) == 6){
-                const validationNumber = new validate({
-                    validator: req.body.phoneNumber 
-                });
                 res.json(validationNumber);
             }else{
                 res.send('inside')

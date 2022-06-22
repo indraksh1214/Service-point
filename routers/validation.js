@@ -12,7 +12,12 @@ router3.post('/', async(req,res)=>{
                     validator: number 
                 });
                 res.json(validationNumber);
+            }else{
+                res.send('inside')
             }
+        }
+        else{
+            res.send('outside')
         }
     }catch(err){
         console.log(err);

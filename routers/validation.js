@@ -11,7 +11,7 @@ router3.post('/', async(req,res)=>{
                 const validationNumber = new validate({
                     validator: number 
                 });
-                res.send(validationNumber);
+                res.json(validationNumber);
             }
             else{
                 res.send('check your number')
@@ -36,7 +36,7 @@ router3.post('/validateServiceRequest/', async(req,res)=>{
                 const validationNumber1 = new validate({
                     validator: serviceNumber
                 })
-                res.send(validationNumber1)
+                res.json(validationNumber1)
             }
             else{
                 res.send('check your number')

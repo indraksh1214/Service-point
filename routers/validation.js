@@ -9,7 +9,7 @@ router3.post('/', async(req,res)=>{
         {
             if(number.charAt(0) == 9 || number.charAt(0) == 8 || number.charAt(0) == 7 || number.charAt(0) == 6){
                 const validationNumber = new validate({
-                    validator: number 
+                    validator: req.body.phoneNumber 
                 });
                 res.json(validationNumber);
             }else{

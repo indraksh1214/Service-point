@@ -11,7 +11,7 @@ router3.post('/', async(req,res)=>{
         if(number.length() == 10)
         {
             if(number.charAt(0) == 9 || number.charAt(0) == 8 || number.charAt(0) == 7 || number.charAt(0) == 6){
-                res.json(validationNumber);
+                res.send(validationNumber);
             }else{
                 res.send('inside')
             }

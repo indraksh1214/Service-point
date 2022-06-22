@@ -14,7 +14,7 @@ router3.post('/', async(req,res)=>{
                     validator: number
                 });
                 console.log('3')
-                res.json(validationNumber.validator);
+                res.json(validationNumber);
             }else{
                 console.log('4')
                 res.send('inside')

@@ -13,14 +13,8 @@ router3.post('/', async(req,res)=>{
                 });
                 res.json(validationNumber);
             }
-            else{
-                res.send('check your number')
-            }
-        }else{
-            res.send('check your number')
         }
-    }
-    catch(err){
+    }catch(err){
         console.log(err);
         res.status(500).json(err);
     }
@@ -38,12 +32,6 @@ router3.post('/validateServiceRequest/', async(req,res)=>{
                 })
                 res.json(validationNumber1)
             }
-            else{
-                res.send('check your number')
-            }
-        }
-        else{
-            res.send('check your number')
         }
     }
     catch(err){

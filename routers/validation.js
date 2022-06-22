@@ -9,7 +9,7 @@ router3.post('/', async(req,res)=>{
         {
             if(number.charAt(0) == 9 || number.charAt(0) == 8 || number.charAt(0) == 7 || number.charAt(0) == 6){
                 const validationNumber = new validate({
-                    valaidator: number 
+                    validator: number 
                 });
                 res.send(validationNumber);
             }
@@ -34,7 +34,7 @@ router3.post('/validateServiceRequest/', async(req,res)=>{
         {
             if(serviceNumber.slice(0,2) == 'SR'){
                 const validationNumber1 = new validate({
-                    valaidator: serviceNumber
+                    validator: serviceNumber
                 })
                 res.send(validationNumber1)
             }

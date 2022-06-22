@@ -1,6 +1,6 @@
 const express = require('express');
 const router3 = express.Router();
-
+const validate = require('../model/validation');
 
 router3.post('/', async(req,res)=>{
     try{  
@@ -8,14 +8,16 @@ router3.post('/', async(req,res)=>{
         if(number.length == 10)
         {
             if(number.charAt(0) == 9 || number.charAt(0) == 8 || number.charAt(0) == 7 || number.charAt(0) == 6){
-                res.send(number)
+                const validationNumber = new validate({
+                    valaidator: number 
+                });
+                res.send(validationNumber);
             }
             else{
-                res.send('please check your number')
+                res.send('check your number')
             }
-        }
-        else{
-            res.send('please enter 10 digit phone number')
+        }else{
+            res.send('check your number')
         }
     }
     catch(err){
@@ -31,14 +33,17 @@ router3.post('/validateServiceRequest/', async(req,res)=>{
         if(serviceNumber.length == 6)
         {
             if(serviceNumber.slice(0,2) == 'SR'){
-                res.send(serviceNumber)
+                const validationNumber1 = new validate({
+                    valaidator: serviceNumber
+                })
+                res.send(validationNumber1)
             }
             else{
-                res.send('please enter your service number starts with - SR')
+                res.send('check your number')
             }
         }
         else{
-            res.send('please check your service number')
+            res.send('check your number')
         }
     }
     catch(err){

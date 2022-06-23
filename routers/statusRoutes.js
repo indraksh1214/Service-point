@@ -31,11 +31,8 @@ router2.get('/', async(req,res)=>{
 
 router2.get('/getStatus/:serviceNumber', async(req,res)=>{
     try{  
-        //const NewStatus = new Status({
-          //  serviceNumber: req.body.serviceNumber})
-
-        const getStatus = await Status.findOne({serviceNumber: req.params.serviceNumber});
-        res.send(''+getStatus.status);
+        const getStatus = await Status.findOne({serviceNumber: req.body.serviceNumber});
+        res.send(getStatus);
     }
     catch(err){
         console.log(err);

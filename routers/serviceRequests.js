@@ -34,10 +34,8 @@ router1.get('/', async(req,res)=>{
 
 router1.get('/getServiceNumber/:number', async(req,res)=>{
     try{
-        //const newRequest = new Request({
-          //  number: req.body.number})
-        const getServiceNumber = await Request.findOne({serviceNumber: req.params.number});
-            res.send('Hi '+getServiceNumber.name+' phone '+getServiceNumber.number+'. Here is your service request number '+getServiceNumber.serviceNumber);
+        const getServiceNumber = await Request.findOne({number: req.body.number});
+            res.send(getServiceNumber);
         }
     catch(err){
         console.log(err);

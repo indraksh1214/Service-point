@@ -8,13 +8,19 @@ const requestService = mongoose.Schema({
         type: String,
         required: true
     },
-    problem: {
-        type: String,
-        required: true
-    },    
-    serviceNumber: {
-        type: String,
-    }
+    service_request : [{
+        problem: {
+            type: String,
+            required: true
+        },    
+        serviceNumber: {
+            type: String,
+        },
+        status: {
+            type: String,
+            required: true
+        }
+    }]
 });
 
 module.exports = mongoose.model('servicerequest', requestService); 

@@ -12,7 +12,7 @@ con.on('error', ()=>{
 
 
 con.on('open', ()=>{
-    console.log('connected..');
+    console.log('DB connected..');
 });
 
 

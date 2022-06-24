@@ -20,11 +20,13 @@ router1.post('/' ,(req,res,next)=>{
     try{
     const a = Math.floor(Math.random() * 100);
     const b = Math.floor(Math.random() * 100);
+    const timestamp = new Date.getTime();
     var c = 'SR'+a+''+b;
     var service_request = {
         problem: req.body.problem,
         serviceNumber:c,
-        status : 0
+        status : 0,
+        timestamp : timestamp
     }
     /** if user exist */
     if(req.user_id){
@@ -44,12 +46,17 @@ router1.post('/' ,(req,res,next)=>{
         });
         const servicRrequest = await request.save();
     }
-    res.send({serviceNumber : c,
+    res.status(201).send({
+        status:1,
+        serviceNumber : c,
         message:'Thank you for registering '+ req.body.name +'. your service request number is '+c+'. use it for futher interaction',
     })
     } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(500).json({
+        status:0,
+        message : 'We are unable to process your request at this time. Please try again.'
+    });
    }
 });
 
@@ -57,12 +64,33 @@ router1.get('/:refNumber', async(req,res)=>{
     const refNumber = req.params.refNumber;
     console.log('Refrence number ',refNumber)
     try{
-        const requests = await Request.findOne({ 
-            $or: [
-                { number: refNumber }, 
-                { "service_request.serviceNumber":refNumber }
-            ]});
-        res.json(requests);
+        const requests = await Request.findOne(
+            {$or: [ { number: refNumber },{ "service_request.serviceNumber":refNumber }]},
+            {_id:0,name:1,number:1,"service_request.serviceNumber":1,"service_request.status":1}
+        );
+        var message = `Hi ${requests.name}, you have ${requests.service_request.length} ${requests.service_request.length>1?"requests":"request"}.` 
+        var inner_message = "" 
+        for(var i=0;i<requests.service_request.length;i++){
+            let element = requests.service_request[i];
+            console.log(element);
+            console.log("inner_message : ",inner_message);
+            if(inner_message!=""){
+                inner_message = `, request`
+            } 
+            else{
+                inner_message = `Request`
+            }
+            message += `${inner_message} ${element.serviceNumber} is ${element.status==0?'PENDING and expected ETA is 10 days':'COMPLETED'}`
+        };
+        // message = ` ${inner_message}.`
+        let output = {
+            status : 1,
+            message : message,
+            name : requests.name,
+            number : requests.number,
+            serviceNumber : requests.service_request.serviceNumber
+        }
+        res.status(200).json(output);
     }
     catch(err){
         console.log(err);

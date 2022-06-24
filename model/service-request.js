@@ -19,6 +19,10 @@ const requestService = mongoose.Schema({
         status: {
             type: String,
             required: true
+        },
+        timestamp : {
+            type: String,
+            required: true
         }
     }]
 });

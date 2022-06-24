@@ -44,7 +44,9 @@ router1.post('/' ,(req,res,next)=>{
         });
         const servicRrequest = await request.save();
     }
-    res.send('Thank you for registering '+ req.body.name +'. your service request number is '+c+'. use it for futher interaction')
+    res.send({serviceNumber : c,
+        message:'Thank you for registering '+ req.body.name +'. your service request number is '+c+'. use it for futher interaction',
+    })
     } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -79,17 +81,11 @@ router1.get('/', async(req,res)=>{
     }
 })
 
-router1.get('/:number', async(req,res)=>{
+router1.get('/getServiceNumber/:number', async(req,res)=>{
     try{
         const getServiceNumber = await Request.findOne({number: req.params.number});
-        if(getServiceNumber.number == req.params.number){
-            res.send('Hi '+getServiceNumber.name+' phone '+getServiceNumber.number+'. Here is your service request number '+getServiceNumber.serviceNumber);
+            res.send(getServiceNumber);
         }
-        else{
-            res.send('please check your number');
-        }
-        
-    }
     catch(err){
         console.log(err);
         res.status(500).json(err);

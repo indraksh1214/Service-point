@@ -59,7 +59,7 @@ exports.registerRequest = async(req,res)=>{
 }
 
 exports.checkServiceRequestStatus = async(req,res)=>{
-    const refNumber = req.params.refNumber;
+    const refNumber =  req.params.refNumber.replaceAll(/^[ '"]+|[ '"]+$|( ){2,}/g,'$1');
     console.log('Refrence number ',refNumber)
     try{
         const requests = await Request.findOne(

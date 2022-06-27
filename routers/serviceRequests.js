@@ -20,7 +20,7 @@ router1.post('/' ,(req,res,next)=>{
     try{
     const a = Math.floor(Math.random() * 100);
     const b = Math.floor(Math.random() * 100);
-    const timestamp = new Date.getTime();
+    const timestamp = new Date().getTime();
     var c = 'SR'+a+''+b;
     var service_request = {
         problem: req.body.problem,

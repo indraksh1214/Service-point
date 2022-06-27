@@ -69,20 +69,29 @@ router1.get('/:refNumber', async(req,res)=>{
             {_id:0,name:1,number:1,"service_request.serviceNumber":1,"service_request.status":1}
         );
         if(requests){
-            var message = `Hi ${requests.name}, you have ${requests.service_request.length} ${requests.service_request.length>1?"requests":"request"}.` 
-            var inner_message = "" 
-            for(var i=0;i<requests.service_request.length;i++){
-                let element = requests.service_request[i];
-                console.log(element);
-                console.log("inner_message : ",inner_message);
-                if(inner_message!=""){
-                    inner_message = `, request`
-                } 
-                else{
-                    inner_message = `Request`
-                }
-                message += `${inner_message} ${element.serviceNumber} is ${element.status==0?'PENDING and expected ETA is 10 days':'COMPLETED'}`
-            };
+            var message = `Hi ${requests.name},`;
+            if(requests.number==refNumber){
+                message += ` you have ${requests.service_request.length} ${requests.service_request.length>1?"requests":"request"}.` 
+                var inner_message = "" 
+                for(var i=0;i<requests.service_request.length;i++){
+                    let element = requests.service_request[i];
+                    console.log(element);
+                    console.log("inner_message : ",inner_message);
+                    if(inner_message!=""){
+                        inner_message = `, request`
+                    } 
+                    else{
+                        inner_message = `Request`
+                    }
+                    message += `${inner_message} ${element.serviceNumber} is ${element.status==0?'PENDING and expected ETA is 10 days':'COMPLETED'}`
+                };
+            }
+            else{
+                const matched_serviceRequest = await requests.service_request.find(({serviceNumber})=> serviceNumber==refNumber);
+                console.log('matched_serviceRequest : ',matched_serviceRequest)
+                message += ` your request ${matched_serviceRequest.serviceNumber} is ${matched_serviceRequest.status==0?'PENDING and expected ETA is 10 days':'COMPLETED'}`
+            }
+            
         }
         else{
             message = "Sorry, we couldn’t find any request registered. Would you like to register one? "

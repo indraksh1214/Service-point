@@ -15,23 +15,16 @@ con.on('open', ()=>{
     console.log('DB connected..');
 });
 
-
-
 app.use(bodyParser.json());
 
 const serviceRequestRoutes = require('./routers/serviceRequests');
 app.use('/serviceRequest', serviceRequestRoutes);
 
-const statusCheckingRoutes = require('./routers/statusRoutes');
-app.use('/status', statusCheckingRoutes);
-
-const validationRoutes = require('./routers/validation');
-app.use('/validation', validationRoutes);
-
-app.use((req,res,next)=>{
-    res.status(404).json({
-        error:"bad request"
-    })
+app.use((error,req,res,next)=>{
+    console.log(error);
+    const status = error.statusCode || 404;
+    const message = error.message || 'Bad Request';
+    res.status(status).json({message:message});
 })
 
 module.exports = app;

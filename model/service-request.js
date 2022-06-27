@@ -16,7 +16,7 @@ const requestService = mongoose.Schema({
         serviceNumber: {
             type: String,
         },
-        status: {
+        status: { /**0: Pending, 1:Completed */
             type: String,
             required: true
         },

@@ -49,7 +49,7 @@ exports.registerRequest = async(req,res)=>{
     res.status(201).send({
         status:1,
         serviceNumber : c,
-        message:'Thank you for registering '+ req.body.name +'. your service request number is '+c+'. use it for futher interaction',
+        message:'Thank you for registering '+ req.body.name +'. Your service request number is '+c+'. Use it for further interaction.'
     })
     } catch (err) {
         console.log(err);
